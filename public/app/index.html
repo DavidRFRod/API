@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>PHP Ajax Crud using JQuery UI Dialog</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <script>
+            $(document).ready(function(){
+                $("button").click(function(){
+                    $.getJSON("/api/v1/students", function(data, status){
+                        var tabela = $("<table border= '1'></table>");
+                        tabela.append("<tr><td>ID</td><td>Nome</td><td>Sobrenome</td><td>E-mail</td><td>Senha</td></tr>");
+                        $.each(data, function(i,field){
+                            tabela.append("<tr><td>"+field.id+"</td><td>"+field.fname+"</td><td>"+field.lname+"</td><td>"+field.email+"</td><td>"+field.password+"</td></tr>")
+                        });
+                        $("#container").append(tabela);
+                    });
+                });
+            });
+
+    </script>
+    <button>Executar</button>
+ <div id="container" class="container">
+
+ </div>
+    </body>
+</html>
+
+
+
