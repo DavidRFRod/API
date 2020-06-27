@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>Crud using JQuery API/Laravel</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-lg-12 margin-tb">
+                <div class="float-right">
+                    <a class="btn btn-success text-light" id="list">Listar</a>
+                </div>
+            <div class="pull-left">
+                <h2>CRUD API / LARAVEL</h2>
+            </div>
+        </div>
+        <br><br><br>
+
+        <div id="container" class="container">
+
+        </div>
+
+        <script>
+
+            $(document).ready(function(){
+
+
+                 $("#list").click(function(){
+                    $("#container").html("");
+
+
+                    var form = $("<form id='enviar'></form>");
+                    var lNome = $("<strong>Nome:</strong>");
+                    form.append(lNome);
+                    var iNome = $("<input type='text' name='nome' id='nome' class='form-control' placeholder='Nome'>");
+                    form.append(iNome);
+                    var lSobrenome = $("<strong>Sobrenome:</strong>");
+                    form.append(lSobrenome);
+                    var iSobrenome = $("<input type='text' name='sobrenome' id='sobrenome' class='form-control' placeholder='Sobrenome'>");
+                    form.append(iSobrenome);
+                    var lEmail = $("<strong>E-mail:</strong>");
+                    form.append(lEmail);
+                    var iEmail = $("<input type='email' name='email' id='email' class='form-control' placeholder='exemplo@gmail.com'>");
+                    form.append(iEmail);
+                    var lSenha = $("<strong>Senha:</strong>");
+                    form.append(lSenha);
+                    var iSenha = $("<input type='password' name='senha' id='senha' class='form-control' placeholder='Senha'>");
+                    form.append(iSenha);
+                    var cad = $("<button id='enviar' class='btn btn-info' >Cadastrar</button>");
+                    form.append(cad);
+
+
+
+                    form.submit(function(event){
+                        event.preventDefault();
+                    });
+                    cad.on('click',function(){
+                        $.post("/api/v1/students", {nome:iNome.val(), sobrenome:iSobrenome.val(), email:iEmail.val(), password:iSenha.val(), function (data, status) {
+                            console.log("Data: " + data + "\nStatus: " + status);
+                        }});
+                    });
+                    $("#container").append(form);
+                 });
+            });
+
+
+
+
+
+
+
+
+    </script>
+
+
+</div>
+    </body>
+</html>
+
+
+
